@@ -1,0 +1,139 @@
+
+$f7:#f7f7f7;
+$hei-3:#333;
+$hui-6:#666;
+$hui-9:#999;
+$theme-lan:#007FCC;
+$huang-195: #FFD195;
+
+$yj-8: 8px;
+$yj-10: 10px;
+$yj-20: 20px;
+$yj-25: 25px;
+$yj-30: 30px;
+$yj-50: 50px;
+
+@import './aside.scss';
+@import './other.scss';
+@import './el.scss';
+
+/*公共类*/
+.al {
+    text-align:left
+}
+.ac {
+    text-align:center
+}
+.ar {
+    text-align:right
+}
+.hide {
+    display:none
+}
+.public {
+  color: red;
+}
+
+.container {
+  // background-image: $bgc-b;
+}
+
+/**
+<div class="public-heng">
+  <div class="public-left"></div>
+  <div class="public-center"></div>
+  <div class="publicright"></div>
+</div>
+*/
+
+.public-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.public-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.public-heng {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .public-center{
+    flex: 1;
+  }
+}
+
+.public-info__diriction{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.public-right__box{
+  padding: 30px 20px;
+  flex: 1;
+}
+
+.public-row__center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.public-column__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.public-shou {
+  cursor: pointer;
+}
+
+.public-shou:hover{
+  color: $theme-lan;
+}
+
+.public-right__box{
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.public-handel-user__box{
+  margin-right: 30px;
+  align-items: center;
+  font-size: 25px;
+  div,span{
+    cursor: pointer;
+  }
+}
+
+// 页面基础结构
+// <div class="container public-row">
+// <aside-box></aside-box>
+// <!-- 右边 -->
+// <div class="public-right__box">
+//   <!-- 上面 -->
+//   <div class="public-row public-handel-user__box">
+//     <user>
+//       <template v-slot:search>
+//         <search></search>
+//       </template>
+//       <template v-slot:right>
+//         <span class="margin-30 el-icon-switch-button"></span>
+//       </template>
+//     </user>
+//   </div>
+
+//   <!-- 底部入口 -->
+//   <div class="public-row__center">
+//     <btn-preservation v-for="(item, index) in categoryList" :key="index" :info="item.name"  @click.native="handleGomanAndWoman(item.router, item.params)"></btn-preservation>
+//   </div>
+// </div>
+// </div>
