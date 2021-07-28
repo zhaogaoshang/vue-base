@@ -20,6 +20,13 @@ const route = new Router({
           meta: {
             requiresAuth: true
           }
+        },
+        {
+          path: '/base/single',
+          component: () => import('@/views/Single'),
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
