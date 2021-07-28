@@ -1,5 +1,6 @@
 <template>
   <div class="" @click="$router.push('/login')">
+  index
   </div>
 </template>
 <script>
