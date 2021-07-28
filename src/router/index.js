@@ -37,6 +37,14 @@ const route = new Router({
       meta: {
         requiresAuth: false
       }
+    },
+    {
+      path: '*',
+      name: '404',
+      component: () => import('@/views/NotFind'),
+      meta: {
+        requiresAuth: false
+      }
     }
   ]
 })
