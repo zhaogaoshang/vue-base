@@ -48,7 +48,6 @@
 </template>
 <script>
 import CryptoJS from 'crypto-js'
-import 'element-ui/lib/theme-chalk/index.css'
 import {
   Form,
   FormItem,
@@ -135,7 +134,7 @@ export default {
           this.$store.commit('user/setUserInfo', res.result)
           this.$store.commit('user/setToken', res.sign)
           this.loading = false
-          this.$router.replace('/index')
+          this.$router.push('/')
           // this.$router.replace('/scanCodeToEnter')
         } else {
           let msgBox = this.$refs.msgBox

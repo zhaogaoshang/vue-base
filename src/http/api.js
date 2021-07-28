@@ -5,8 +5,8 @@
 // let host = process.env.NODE_ENV === 'development' ? 'http://localhost:8081' : ''
 const apis = {}
 
-apis.host = 'http://192.168.0.11:8090/' // 域名
-apis.photoHost = 'http://192.168.0.11:8090' // 域名
+apis.host = process.env.BASE_API // 域名
+apis.photoHost = process.env.BASE_API // 域名
 
 const $apis = {
   host: apis.host,
