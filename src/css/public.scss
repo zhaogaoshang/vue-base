@@ -3,7 +3,7 @@ $f7:#f7f7f7;
 $hei-3:#333;
 $hui-6:#666;
 $hui-9:#999;
-$theme-lan:#007FCC;
+$theme-lan:#4972F1;
 $huang-195: #FFD195;
 
 $yj-8: 8px;
@@ -104,4 +104,8 @@ $yj-50: 50px;
   div,span{
     cursor: pointer;
   }
+}
+
+::-webkit-scrollbar{
+  display:none;/*ChromeSafari*/
 }

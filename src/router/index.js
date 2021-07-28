@@ -9,9 +9,19 @@ const route = new Router({
       path: '/',
       name: 'Index',
       component: () => import('@/views/Index'),
+      redirect: '/personality/store',
       meta: {
         requiresAuth: true
-      }
+      },
+      children: [
+        {
+          path: '/personality/store',
+          component: () => import('@/views/PersonalityStore'),
+          meta: {
+            requiresAuth: true
+          }
+        }
+      ]
     },
     {
       path: '/login',
@@ -25,6 +35,7 @@ const route = new Router({
 })
 
 route.beforeEach((to, from, next) => {
+  console.log(to)
   if (to.meta.requiresAuth) {
     if (store.state.user.userInfo === null) {
       next('/login')
