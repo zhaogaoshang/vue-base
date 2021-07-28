@@ -5,5 +5,6 @@ const apis = require('../src/http/packageApis')
 module.exports = merge(devEnv, {
   NODE_ENV: '"testing"',
   EVN_CONFIG: '"test"',
-  BASE_API: '"' + apis.devEnvHost + '"'
+  BASE_API: '"' + apis.devEnvHost + '"',
+  IMAGE_PATH: '"' + apis.imagePath + '"'
 })
