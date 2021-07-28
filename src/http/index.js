@@ -1,11 +1,10 @@
 import axios from 'axios'
-import api from './api'
 import Qs from 'qs'
 
 import store from '../store'
 
 const axiosWrap = axios.create({
-  baseURL: api.host,
+  baseURL: process.env.BASE_API,
   timeout: 500000,
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
@@ -17,19 +16,19 @@ const axiosWrap = axios.create({
 
 // 添加请求拦截器
 axiosWrap.interceptors.request.use(function (config) {
-  console.log(config)
-  // console.log(store.state.user.userInfo)
+  let merchantCode = store.state.user.userInfo === null ? '' : store.state.user.userInfo.merchantCode
+  let superMerchantCode = store.state.user.userInfo === null ? '' : store.state.user.userInfo.superMerchantCode
 
   if (config.method === 'get') {
     config.params = {
-      superMerchantCode: store.state.user.userInfo.superMerchantCode,
-      merchantCode: store.state.user.userInfo.merchantCode,
+      merchantCode,
+      superMerchantCode,
       ...config.params
     }
   } else {
     config.data = {
-      superMerchantCode: store.state.user.userInfo.superMerchantCode,
-      merchantCode: store.state.user.userInfo.merchantCode,
+      merchantCode,
+      superMerchantCode,
       ...config.data
     }
   }

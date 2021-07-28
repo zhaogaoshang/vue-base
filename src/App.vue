@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="fold">
-      <keep-alive include="Index">
+      <keep-alive include="Index, Login">
         <router-view/>
       </keep-alive>
     </transition>

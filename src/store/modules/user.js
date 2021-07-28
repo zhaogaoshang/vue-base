@@ -1,7 +1,7 @@
 const user = {
   namespaced: true,
   state: () => ({
-    userInfo: {}
+    userInfo: null
   }),
   mutations: {
     // 设置男性列表

@@ -5,7 +5,6 @@ import App from './App'
 
 // 第三方
 import router from './router'
-import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import instance from '@/http' // vue-axios
 import VueAxios from 'vue-axios' // vue-axios
@@ -17,7 +16,6 @@ import $utils from './utils' // utils
 import apis from '@/http/api' // apis
 
 // 第三方
-Vue.use(ElementUI)
 Vue.use(VueAxios, instance) // vue-axios
 
 // 自定义
@@ -28,9 +26,9 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
   store,
   router,
-  components: { App },
-  template: '<App/>'
+  el: '#app',
+  template: '<App/>',
+  components: { App }
 })
