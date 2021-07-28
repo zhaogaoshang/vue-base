@@ -1,6 +1,6 @@
 <template>
   <div class="" @click="$router.push('/login')">
-  index
+  index111
   </div>
 </template>
 <script>
