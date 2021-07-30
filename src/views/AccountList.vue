@@ -107,6 +107,7 @@ export default {
   },
 
   created () {
+    this._getList()
   },
 
   activated () {

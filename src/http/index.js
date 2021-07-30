@@ -18,18 +18,21 @@ const axiosWrap = axios.create({
 axiosWrap.interceptors.request.use(function (config) {
   let merchantCode = store.state.user.userInfo === null ? '' : store.state.user.userInfo.merchantCode
   let superMerchantCode = store.state.user.userInfo === null ? '' : store.state.user.userInfo.superMerchantCode
-
-  if (config.method === 'get') {
-    config.params = {
-      merchantCode,
-      superMerchantCode,
-      ...config.params
-    }
+  if (config.headers['Content-Type'] === 'multipart/form-data') {
+    console.log(config)
   } else {
-    config.data = {
-      merchantCode,
-      superMerchantCode,
-      ...config.data
+    if (config.method === 'get') {
+      config.params = {
+        merchantCode,
+        superMerchantCode,
+        ...config.params
+      }
+    } else {
+      config.data = {
+        merchantCode,
+        superMerchantCode,
+        ...config.data
+      }
     }
   }
   // 在发送请求之前做些什么

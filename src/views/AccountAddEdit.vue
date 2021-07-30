@@ -1,11 +1,12 @@
 <template>
   <div class="store-page">
-      <div class="public-row__align">
-        <div class="public-miaobao-left">企业管理 </div>
-        <div class="public-mianbao-middle"> > </div>
-        <div class="public-mianbao-right" v-if="$route.query.type=='add'"> 添加企业 </div>
-        <div class="public-mianbao-right" v-else-if="$route.query.type=='edit'"> 修改企业 </div>
-        <btn class="public-mianbao-back" @click.native="$router.go(-1)">返回上一级</btn>
+      <div class="backbox">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>企业管理</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="$route.query.type=='add'">添加企业</el-breadcrumb-item>
+          <el-breadcrumb-item v-else-if="$route.query.type=='edit'">修改企业</el-breadcrumb-item>
+        </el-breadcrumb>
+        <btn class="back" @click.native="$router.back()">返回上一级</btn>
       </div>
     <shadow-box>
       <div class="title" v-if="$route.query.type=='add'">添加企业</div>
@@ -31,16 +32,16 @@
             <div v-if="ruleForm.phone">
               <br/>
               <el-form-item label="营业执照：" prop="businessPhotos">
-                <f-upload
-                  :url="$apis.api_upload_userByBusinessPhotos"
-                  :upData="{
-                    name: '1245',
-                    age: '12',
-                    phone: '13716171560'
-                  }"
-                  @on-success="handleDiscriptionImage">
-                  <btn typeStyle="su">上传</btn>
-                </f-upload>
+                <FUpload
+                :upData="{
+                  name: '1245',
+                  age: '12',
+                  phone: '13716171560'
+                }"
+                :url="$apis.api_upload_userByBusinessPhotos"
+                @on-success="handleDiscriptionImage">
+                <btn typeStyle="su">上传</btn>
+                </FUpload>
               </el-form-item>
               <div class="public-row__align image-list">
                 <div class="image-box" v-for="(item, index) in ruleForm.businessPhotos" :key="index">
@@ -100,7 +101,7 @@ import User from '../components/User.vue'
 import ShadowBox from '../components/ShadowBox.vue'
 import DiscolorBtn from '../components/DiscolorBtn.vue'
 import FUpload from '../components/FUpload.vue'
-import {Input, Form, FormItem, Select, Option} from 'element-ui'
+import {Input, Form, FormItem, Select, Option, Breadcrumb, BreadcrumbItem} from 'element-ui'
 export default {
   components: {
     User,
@@ -112,7 +113,9 @@ export default {
     ElForm: Form,
     ElFormItem: FormItem,
     ElSelect: Select,
-    ElOption: Option},
+    ElOption: Option,
+    ElBreadcrumb: Breadcrumb,
+    ElBreadcrumbItem: BreadcrumbItem},
   data () {
     return {
       ruleForm: {
@@ -199,7 +202,7 @@ export default {
       pic.append('phone', this.ruleForm.phone)
       let config = {
         headers: {
-          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data',
           'token': this.$store.state.user.token
         }
       }
@@ -367,7 +370,19 @@ export default {
     width: 150px;
   }
 }
-
+.el-input /deep/ .el-input__inner{
+  width:400px;
+}
+.backbox {
+  position: fixed;
+  top:30px;
+  left:330px;
+  display: flex;
+  align-items: center;
+}
+.back {
+  margin-left:24px;
+}
 .imh{
   height: 100px;
   width: 100px;
