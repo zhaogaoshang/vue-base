@@ -106,7 +106,7 @@ import ShadowBox from '../components/ShadowBox.vue'
 import Search from '../components/Search.vue'
 import DiscolorBtn from '../components/DiscolorBtn.vue'
 import Btn from '../components/Btn.vue'
-import {Input, Dialog, Button, Col, Card} from 'element-ui'
+import {Input, Dialog, Button, Col, Card, Row, Pagination} from 'element-ui'
 export default {
   components: {
     ShadowBox,
@@ -117,7 +117,9 @@ export default {
     ElInput: Input,
     ElButton: Button,
     ElCol: Col,
-    ElCard: Card
+    ElCard: Card,
+    ElRow: Row,
+    ElPagination: Pagination
   },
   data () {
     return {

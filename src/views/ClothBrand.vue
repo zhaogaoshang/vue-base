@@ -1,12 +1,20 @@
 <template>
   <div class="public-column category">
-      <div class="top">
+      <!-- <div class="top">
         <div class="public-miaobao-left">面料管理 </div>
         <div class="public-mianbao-middle"> > </div>
         <div class="public-mianbao-right" v-if="$route.query.type == 1">品牌管理</div>
         <div class="public-mianbao-right" v-if="$route.query.type == 2">颜色管理</div>
         <div class="public-mianbao-right" v-if="$route.query.type == 3">属性管理</div>
         <btn class="public-mianbao-back" @click.native="$router.go(-1)">返回上一级</btn>
+      </div> -->
+      <div class="backbox">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item>面料管理</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="$route.query.type == 2">颜色管理</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="$route.query.type == 3">属性管理</el-breadcrumb-item>
+        </el-breadcrumb>
+        <btn class="back" @click.native="$router.go(-1)">返回上一级</btn>
       </div>
 
     <div class="public-row bottom-info">
@@ -89,7 +97,7 @@ import User from '../components/User.vue'
 import Search from '../components/Search.vue'
 import ShadowBox from '../components/ShadowBox.vue'
 import DiscolorBtn from '../components/DiscolorBtn.vue'
-import {Dialog, Button, Input, Pagination, Col, Row} from 'element-ui'
+import {Dialog, Button, Input, Pagination, Col, Row, Breadcrumb, BreadcrumbItem} from 'element-ui'
 
 export default {
   components: {
@@ -103,7 +111,9 @@ export default {
     ElInput: Input,
     ElPagination: Pagination,
     ElCol: Col,
-    ElRow: Row},
+    ElRow: Row,
+    ElBreadcrumb: Breadcrumb,
+    ElBreadcrumbItem: BreadcrumbItem},
   name: 'ClothBrand',
   data () {
     return {
@@ -389,23 +399,18 @@ export default {
   .bottom-info{
     flex: 1;
   }
-//   .top{
-//     display:flex;
-//     position: fixed;
-//     top:30px;
-//     text-align:center;
-//     div{
-//         font-size: 20px;
-//         margin-right:20px;
-//         text-align: center;
-//     }
-//     .public-miaobao-left
-//     .public-miaobao-right{
-//         margin-top:10px;
-//     }
-//   }
   .input-name{
     flex: 1;
+  }
+  .backbox {
+  position: fixed;
+  top:30px;
+  left:330px;
+  display: flex;
+  align-items: center;
+  }
+  .back {
+  margin-left:24px;
   }
   .title{
     font-size: 22px;
