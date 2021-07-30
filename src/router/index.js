@@ -20,6 +20,64 @@ const route = new Router({
           meta: {
             requiresAuth: true
           }
+        },
+        {
+          path: 'base/position/special',
+          component: () => import('@/views/PositionSpecial'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'base/cloth/brand',
+          component: () => import('@/views/FabricBrandList'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'base/loss',
+          component: () => import('@/views/lossReportingReasons'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'base/largesse',
+          component: () => import('@/views/reasonForLargeVolume'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'base/versionManagement',
+          component: () => import('@/views/versionManagement'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'base/versionEDit',
+          component: () => import('@/views/versionEdit'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/account/list',
+          name: 'AccountList',
+          component: () => import('@/views/AccountList'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/account/add/edit',
+          name: 'AccountAddEdit',
+          component: () => import('@/views/AccountAddEdit'),
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     },
