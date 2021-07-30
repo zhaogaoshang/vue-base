@@ -26,7 +26,44 @@ const route = new Router({
           component: () => import('@/views/Single'),
           meta: {
             requiresAuth: true
-          }
+          },
+          children: [
+            {
+              path: '/base/singleFourthNode',
+              component: () => import('@/views/SingleFourthNode'),
+              meta: {
+                requiresAuth: true,
+                module: '/base/single'
+              }
+            },
+            {
+              path: '/base/singleFifthNode',
+              component: () => import('@/views/SingleFifthNode'),
+              meta: {
+                requiresAuth: true,
+                module: '/base/single'
+              }
+            }
+          ]
+        },
+        {
+          path: '/base/suit',
+          name: 'Suit',
+          component: () => import('@/views/Suit.vue'),
+          meta: {
+            requiresAuth: true
+          },
+          children: [
+            {
+              path: '/base/suitSecondNode',
+              name: 'SuitSecondNode',
+              component: () => import('@/views/SuitSecondNode.vue'),
+              meta: {
+                requiresAuth: true,
+                module: '/base/suit'
+              }
+            }
+          ]
         }
       ]
     },
@@ -55,7 +92,11 @@ route.beforeEach((to, from, next) => {
     if (store.state.user.userInfo === null) {
       next('/login')
     } else {
-      store.commit('aside/switch', to.fullPath)
+      let activePath = to.fullPath
+      if (to.meta.module) {
+        activePath = to.meta.module
+      }
+      store.commit('aside/switch', activePath)
       next()
     }
     return false

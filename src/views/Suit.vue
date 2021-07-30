@@ -3,7 +3,7 @@
     <search @search="search" class="search"></search>
     <el-card class="box-card left_card" @click.native.self="handleRemoveCurrentNode">
       <div class="add">
-        <span class="el-icon-circle-plus-outline" @click="handleSetNode('添加分类')"></span>
+        <span class="el-icon-circle-plus-outline" @click.stop="handleSetNode('添加分类')"></span>
       </div>
       <div class="tree_box">
         <el-tree
@@ -23,7 +23,7 @@
           <span v-else-if="node.level===2" :class="['custom-tree-node','text2']" slot-scope="{ node, data }">
             <span  :class="[data.status===1?'status1':'']">{{ data.name }}</span>
             <span>
-
+              <i @click.self="handleSetNode('编辑分类名称')" class="el-icon-edit text2"></i>
             </span>
           </span>
           <span v-else-if="node.level===3" :class="['custom-tree-node','text3']" slot-scope="{ node, data }">
@@ -71,7 +71,7 @@
             </el-option>
           </el-select>
         </div>
-        <div>
+        <div class="view">
           <router-view></router-view>
         </div>
       </div>
@@ -105,7 +105,7 @@ import {
   Message
 } from 'element-ui'
 export default {
-  name: 'Single',
+  name: 'Suit',
   components: {
     Search,
     CenterDialog,
@@ -146,23 +146,16 @@ export default {
       console.log(data, node, component)
       this.currentNode = data
       // 选中前三级 进入同一个路由
-      if (node.level <= 3 || node.level === 6) {
+      if (node.level === 1) {
         this.$router.replace({
-          path: '/base/single',
+          path: '/base/suit',
           query: {
 
           }
         })
-      } else if (node.level === 4) {
+      } else if (node.level === 2) {
         this.$router.replace({
-          path: '/base/singleFourthNode',
-          query: {
-            currentNode: JSON.stringify(this.currentNode)
-          }
-        })
-      } else if (node.level === 5) {
-        this.$router.replace({
-          path: '/base/singleFifthNode',
+          path: '/base/suitSecondNode',
           query: {
             currentNode: JSON.stringify(this.currentNode)
           }
@@ -293,7 +286,9 @@ $color1:rgba(77, 77, 77, 1);
 // }
 .box-card {
   border-radius: 30px;
-
+}
+.el-card {
+  min-height: 822px;
 }
 .left_card {
   box-sizing: border-box;
@@ -313,6 +308,12 @@ $color1:rgba(77, 77, 77, 1);
 }
 .tree_box /deep/.el-tree-node__content {
   margin: 5px 0;
+}
+.custom-tree-node {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .text1 {
   font-size: 22px;
@@ -441,5 +442,8 @@ $color1:rgba(77, 77, 77, 1);
 .status1 {
   color: rgba(204, 0, 38, 1);
   text-decoration: line-through;
+}
+.view {
+  height: 750px;
 }
 </style>
