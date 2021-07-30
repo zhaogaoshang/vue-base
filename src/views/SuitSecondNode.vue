@@ -103,6 +103,12 @@ export default {
     }
   },
   watch: {
+    $route: {
+      handler () {
+        this._getList()
+      },
+      deep: true
+    }
   },
   methods: {
     async _getList () {
