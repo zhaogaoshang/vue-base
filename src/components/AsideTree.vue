@@ -51,7 +51,8 @@ export default {
           icon: 'caidan-qiye.png',
           sub: [
             {
-              name: '企业账号管理'
+              name: '企业账号管理',
+              path: '/account/list'
             },
             {
               name: '企业类别管理'
@@ -125,7 +126,12 @@ export default {
           icon: 'caidan-xitong.png',
           sub: [
             {
-              name: '版本管理'
+              name: '版本管理',
+              path: '/base/versionManagement'
+            },
+            {
+              // name: '版本管理',
+              path: '/base/versionEdit'
             }
           ]
         }

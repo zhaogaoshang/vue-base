@@ -18,7 +18,31 @@ const $apis = {
   api_upload_categoriesUploadPhoto: 'api/upload/categoriesUploadPhoto', // 其他文件上传
   api_category_save: '/api/category/save', // 单品分类添加
   api_category_update: '/api/category/update', // 单品分类修改
-  api_category_list: '/api/category/list' // 单品分类列表
+  api_category_list: '/api/category/list', // 单品分类列表
+
+  // 特体信息管理
+  api_specialBodily_list: '/api/specialBodily/list', // 特体信息管理 列表
+  api_specialBodily_save: '/api/specialBodily/save', // 父级特体
+  api_specialBodily_update: '/api/specialBodily/update', // 修改
+  api_specialBodily_subsetUpdate: '/api/specialBodily/subsetUpdate', // 修改子集
+
+  // 报损原因维护
+  api_materialLossCause_list: '/api/materialLossCause/list', // 报损原因列表
+  api_materialLossCause_update: '/api/materialLossCause/update', // 修改
+  api_materialLossCause_save: '/api/materialLossCause/save', // 添加
+  api_appVersion_pageList: '/api/appVersion/pageList', // 版本管理列表
+  api_appVersion_save: '/api/appVersion/save', // 添加版本
+  appVersion_update: '/api/appVersion/update', // 修改版本
+  api_appVersion_delete: '/api/appVersion/delete', // 删除版本
+  api_upload_appUpload: '/api/upload/appUpload', // 上传版本包
+
+  // 账号管理
+  api_user_save: '/api/user/save', // 添加
+  api_user_select: '/api/user/select', // 查找
+  api_user_update: '/api/user/update', // 修改
+
+  // 获取地址
+  api_address_all: '/api/address/all' // 获取地址
 }
 
 apis.install = function (Vue, options) {
