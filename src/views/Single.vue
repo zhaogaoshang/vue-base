@@ -239,7 +239,7 @@ export default {
     },
     async _getList () {
       try {
-        const res = await this.$http.post(this.$apis.api_category_list, {parentId: 0})
+        const res = await this.$http.post(this.$apis.api_category_list, {parentId: 0, packageType: 1})
         console.log(res)
         this.data = res.result
       } catch (error) {
