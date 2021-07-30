@@ -55,7 +55,12 @@ export default {
               path: '/account/list'
             },
             {
-              name: '企业类别管理'
+              name: '企业类别管理',
+              path: '/project/list'
+            },
+            {
+              name: '支付设置',
+              path: '/account/PaymentSettings'
             }
           ]
         },
@@ -64,7 +69,8 @@ export default {
           icon: 'caidan-mianliao.png',
           sub: [
             {
-              name: '面料资源管理'
+              name: '面料资源管理',
+              path: '/cloth/list'
             },
             {
               name: '品牌信息维护'

@@ -350,6 +350,9 @@ export default {
   font-weight: 800;
   margin-bottom: 20px;
 }
+.el-input /deep/ .el-input--inner{
+  width:400px;
+}
 .store-avatar{
   position: relative;
   height: 100px;

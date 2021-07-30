@@ -3,7 +3,7 @@
     <search @search="search" placeholder="请输入文件名称搜索" v-model="params.fileName"></search>
     <discolor-btn class="discolorbtn" typeStyle="middle" @click.native="handleAddEdit(null)">新增版本</discolor-btn>
     <div class="public-row bottom-info">
-      <shadow-box>
+      <el-card class="card">
         <div class="title">
           <el-select clearable v-model="params.type" placeholder="选择客户端类型">
             <el-option
@@ -69,7 +69,7 @@
             :total="tableData.totalCount">
           </el-pagination>
         </div>
-      </shadow-box>
+      </el-card>
     </div>
 
   </div>
@@ -80,7 +80,7 @@ import DiscolorBtn from '../components/DiscolorBtn.vue'
 import Search from '../components/Search.vue'
 import ShadowBox from '../components/ShadowBox.vue'
 import User from '../components/User.vue'
-import {Button, Input, Table, Form, Pagination, TableColumn, FormItem, Dialog, Select, Option} from 'element-ui'
+import {Button, Input, Table, Form, Pagination, TableColumn, FormItem, Dialog, Select, Option, Card} from 'element-ui'
 export default {
   components: {
     ShadowBox,
@@ -97,7 +97,8 @@ export default {
     ElFormItem: FormItem,
     ElDialog: Dialog,
     ElSelect: Select,
-    ElOption: Option},
+    ElOption: Option,
+    ElCard: Card},
   name: 'VersionManagement',
 
   data () {
@@ -233,7 +234,11 @@ export default {
   .bottom-info{
     flex: 1;
   }
-
+.card{
+  border-radius: 30px;
+  width: 100%;
+  min-height: 700px;
+}
   .top-user{
     justify-content: space-between;
   }

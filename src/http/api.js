@@ -16,6 +16,7 @@ const $apis = {
   api_upload_uploadPhoto: 'api/upload/uploadPhoto', // 上传图片
   api_upload_modelingUploadPhoto: 'api/upload/modelingUploadPhoto', // 上传模型文件
   api_upload_categoriesUploadPhoto: 'api/upload/categoriesUploadPhoto', // 其他文件上传
+  api_upload_userByBusinessPhotos: '/api/upload/userByBusinessPhotos', // 上传营业执照
   api_category_save: '/api/category/save', // 单品分类添加
   api_category_update: '/api/category/update', // 单品分类修改
   api_category_list: '/api/category/list', // 单品分类列表
@@ -47,7 +48,19 @@ const $apis = {
   api_user_update: '/api/user/update', // 修改
 
   // 获取地址
-  api_address_all: '/api/address/all' // 获取地址
+  api_address_all: '/api/address/all', // 获取地址
+
+  // 支付方式设置
+  api_pay_list: '/api/pay/list', // 支付方式列表
+  api_pay_update: '/api/pay/update', // 选择默认支付方式
+  // 面料的配置
+  api_materialConfig_list: '/api/materialConfig/list', // 列表
+  api_materialConfig_save: '/api/materialConfig/save', // 添加
+  api_materialConfig_update: '/api/materialConfig/update', // 修改
+  // 面料
+  api_material_list: '/api/material/list', // 面料列表
+  api_material_update: '/api/material/update', // 面料编辑
+  api_material_synMaterial: '/api/material/synMaterial' // 面料同步
 }
 
 apis.install = function (Vue, options) {

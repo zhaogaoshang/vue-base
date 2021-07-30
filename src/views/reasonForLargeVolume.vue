@@ -3,7 +3,7 @@
     <search @search="handleSearch()" v-model="params.lossCause"></search>
     <discolor-btn class="discolorbtn" typeStyle="middle" @click.native="handleShow()">添加放量原因</discolor-btn>
     <div class="public-row bottom-info">
-      <shadow-box>
+      <el-card class="card">
         <div class="title">放量原因管理</div>
         <div>
           <el-table
@@ -51,7 +51,7 @@
             :total="tableData.totalCount">
           </el-pagination>
         </div>
-      </shadow-box>
+      </el-card>
     </div>
     <el-dialog
       :title="title"
@@ -90,7 +90,7 @@ import DiscolorBtn from '../components/DiscolorBtn.vue'
 import Search from '../components/Search.vue'
 import ShadowBox from '../components/ShadowBox.vue'
 import User from '../components/User.vue'
-import {Button, Input, Table, Form, Pagination, TableColumn, FormItem, Dialog} from 'element-ui'
+import {Button, Input, Table, Form, Pagination, TableColumn, FormItem, Dialog, Card} from 'element-ui'
 export default {
   name: 'ReasonsForLargeVolume',
   components: {
@@ -106,7 +106,8 @@ export default {
     ElPagination: Pagination,
     ElTableColumn: TableColumn,
     ElFormItem: FormItem,
-    ElDialog: Dialog
+    ElDialog: Dialog,
+    ElCard: Card
   },
   data () {
     return {
@@ -301,6 +302,11 @@ export default {
   position: absolute;
   top: 30px;
   right: 300px;
+}
+.card{
+  border-radius: 30px;
+  width: 100%;
+  min-height: 700px;
 }
 .category{
   flex: 1;

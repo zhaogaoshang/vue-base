@@ -91,6 +91,29 @@ const route = new Router({
           }
         },
         {
+          path: 'cloth/list',
+          name: 'ClothList',
+          component: () => import('@/views/clothlist'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/cloth/brand',
+          name: 'ClothBrand',
+          component: () => import('@/views/ClothBrand'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        // {
+        //   path: '/cloth/add/edit',
+        //   component: () =>import('@/views/clothaddedit'),
+        //   meta: {
+        //     regenerate: true
+        //   }
+        // },
+        {
           path: 'base/loss',
           component: () => import('@/views/lossReportingReasons'),
           meta: {
@@ -120,7 +143,7 @@ const route = new Router({
           }
         },
         {
-          path: '/account/list',
+          path: 'account/list',
           name: 'AccountList',
           component: () => import('@/views/AccountList'),
           meta: {
@@ -128,12 +151,28 @@ const route = new Router({
           }
         },
         {
-          path: '/account/add/edit',
+          path: '/project/list',
+          name: 'Projectlist',
+          component: () => import('@/views/ProjectList'),
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'account/add/edit',
           name: 'AccountAddEdit',
           component: () => import('@/views/AccountAddEdit'),
           meta: {
             requiresAuth: true,
             module: '/account/list'
+          }
+        },
+        {
+          path: '/account/PaymentSettings',
+          name: 'PaymentSettings',
+          component: () => import('@/views/PaymentSettings'),
+          meta: {
+            requiresAuth: true
           }
         }
       ]
