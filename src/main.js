@@ -6,6 +6,8 @@ import App from './App'
 // 第三方
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
+import {MessageBox, Message} from 'element-ui'
+// import {Message} from 'element-ui'
 import instance from '@/http' // vue-axios
 import VueAxios from 'vue-axios' // vue-axios
 import store from '@/store' // vuex
@@ -21,6 +23,8 @@ Vue.use(VueAxios, instance) // vue-axios
 // 自定义
 Vue.use($utils) // utils
 Vue.use(apis) // apis
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 
 Vue.config.productionTip = false
 

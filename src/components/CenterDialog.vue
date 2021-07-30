@@ -1,5 +1,6 @@
 <template>
   <el-dialog
+    class="dialog_box"
     :show-close="showClose"
     append-to-body
     :visible.sync="dialogVisible"
@@ -68,7 +69,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .el-dialog__header {
+  .dialog_box /deep/.el-dialog .el-dialog__header {
     padding:0;
   }
   .dia_title {
