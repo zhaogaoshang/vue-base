@@ -1,9 +1,7 @@
 <template>
   <div class="public-column category">
-    <div class="search">
-      <search @search="search" placeholder="请输入文件名称搜索" v-model="params.fileName"></search>
-      <discolor-btn class="btn" typeStyle="middle" @click.native="handleAddEdit(null)">新增版本</discolor-btn>
-    </div>
+    <search @search="search" placeholder="请输入文件名称搜索" v-model="params.fileName"></search>
+    <discolor-btn class="discolorbtn" typeStyle="middle" @click.native="handleAddEdit(null)">新增版本</discolor-btn>
     <div class="public-row bottom-info">
       <shadow-box>
         <div class="title">
@@ -224,15 +222,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.search{
-    display:flex;
-    justify-content: space-between;
-    position:fixed;
-    top:30px;
-    left:330px;
-    .btn{
-        margin-left: 750px;;
-    }
+/deep/.discolorbtn {
+  position: absolute;
+  top: 30px;
+  right: 300px;
 }
 .category{
   flex: 1;

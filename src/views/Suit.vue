@@ -123,7 +123,8 @@ export default {
       currentNode: null,
       dialogVisible: false,
       title: '添加',
-      categoryName: '' // 当前选中节点的分类名称
+      categoryName: '', // 当前选中节点的分类名称
+      levels2: []
     }
   },
   methods: {
@@ -136,7 +137,7 @@ export default {
       this.currentNode = null
       this.categoryName = ''
       this.$router.replace({
-        path: '/base/single',
+        path: '/base/suit',
         query: {
 
         }
@@ -168,7 +169,7 @@ export default {
       if (title === '编辑分类名称') {
         this.categoryName = this.currentNode !== null ? this.currentNode.name : ''
       } else {
-        if (this.currentNode && this.currentNode.levels >= 5) {
+        if (this.currentNode && this.currentNode.levels > 1) {
           return Message.warning('不允许添加')
         }
       }
@@ -227,12 +228,38 @@ export default {
     },
     async _getList () {
       try {
-        const res = await this.$http.post(this.$apis.api_category_list, {parentId: 0})
+        const res = await this.$http.post(this.$apis.api_category_list, {parentId: 0, packageType: 2})
         console.log(res)
-        this.data = res.result
+        if (res.code !== 'SUCCESS') {
+          return Message.error(res.msg)
+        }
+        // 数据处理 只要前两级 三级以上保存起来
+        this.onlyFirstTwo(res.result)
       } catch (error) {
         console.log(error)
       }
+    },
+    onlyFirstTwo (data) {
+      let levels2 = []
+      function dep (levels, list) {
+        list.forEach(item => {
+          if (item.levels === levels) {
+            if (item.children) {
+              item.children.forEach(lv2 => {
+                levels2.push(lv2)
+              })
+              delete item.children
+            }
+          } else {
+            if (item.children) {
+              dep(1, item.children)
+            }
+          }
+        })
+      }
+      dep(1, data)
+      this.levels2 = levels2
+      this.data = data
     },
     // 添加节点
     handleAppend (data) {

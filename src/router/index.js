@@ -105,7 +105,8 @@ const route = new Router({
           path: 'base/versionEDit',
           component: () => import('@/views/versionEdit'),
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            module: 'base/versionManagement'
           }
         },
         {
@@ -121,7 +122,8 @@ const route = new Router({
           name: 'AccountAddEdit',
           component: () => import('@/views/AccountAddEdit'),
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            module: '/account/list'
           }
         }
       ]

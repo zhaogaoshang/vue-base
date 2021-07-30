@@ -1,9 +1,7 @@
 <template>
   <div class="public-column category">
-      <div class="search">
-      <search @search="handleSearch()" v-model="params.lossCause"></search>
-      <discolor-btn class="btn" typeStyle="middle" @click.native="handleShow()">添加报损原因</discolor-btn>
-      </div>
+    <search @search="handleSearch()" v-model="params.lossCause"></search>
+    <discolor-btn class="discolorbtn" typeStyle="middle" @click.native="handleShow()">添加报损原因</discolor-btn>
     <div class="public-row bottom-info">
       <shadow-box>
         <div class="title">报损原因管理</div>
@@ -299,15 +297,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search{
-    display:flex;
-    justify-content: space-between;
-    position:fixed;
-    top:30px;
-    left:330px;
-    .btn{
-        margin-left: 750px;;
-    }
+/deep/.discolorbtn {
+  position: absolute;
+  top: 30px;
+  right: 300px;
 }
 .category{
   flex: 1;
