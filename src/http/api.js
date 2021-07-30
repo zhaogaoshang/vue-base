@@ -19,8 +19,13 @@ const $apis = {
   api_category_save: '/api/category/save', // 单品分类添加
   api_category_update: '/api/category/update', // 单品分类修改
   api_category_list: '/api/category/list', // 单品分类列表
-
+  api_category_listByParentId: '/api/category/listByParentId', // 根据父级节点查询子节点
+  api_category_queryByCategoryList: '/api/category/queryByCategoryList', // 根据套装节点uuid查询关联单品
   // 特体信息管理
+  api_categoryPart_list: '/api/categoryPart/list', // 部位标签列表
+  api_categoryPart_update: '/api/categoryPart/update', // 部位标签修改
+  api_categoryPart_save: '/api/categoryPart/save', // 部位标签添加
+
   api_specialBodily_list: '/api/specialBodily/list', // 特体信息管理 列表
   api_specialBodily_save: '/api/specialBodily/save', // 父级特体
   api_specialBodily_update: '/api/specialBodily/update', // 修改

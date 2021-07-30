@@ -1,18 +1,18 @@
 <template>
   <div class="editbox">
     <div class="editbox_left">
-      <div class="title">西服套装</div>
+      <div class="title">{{JSON.parse(this.$route.query.parentData).name}}</div>
       <div class="tree_box">
         <div class="tree_box_left">
           <el-tree
             :data="data"
             node-key="id"
             :expand-on-click-node="false"
-            :highlight-current="currentNode!==null"
+            :highlight-current="true"
             @node-click="handleNodeClick"
             default-expand-all>
             <span :class="['custom-tree-node','text2']" slot-scope="{ node, data }">
-              <span  :class="[data.status===1?'status1':'']">{{ data.label }}</span>
+              <span>{{ data.name }}</span>
               <span>
                 <i @click.self="handleSetNode(data)" class="el-icon-edit text2"></i>
               </span>
@@ -20,11 +20,8 @@
           </el-tree>
         </div>
         <div class="tree_box_right">
-          <div>
-            男士西服
-          </div>
-          <div>
-            男士西裤
+          <div v-for="(item) in currentNodePitchList" :key="item">
+            {{item.name}}
           </div>
         </div>
       </div>
@@ -35,21 +32,24 @@
       <div class="title component">
         套装组成
         <div class="save">
-          <btn class="savebtn">保存</btn>
+          <btn class="savebtn" @click="handleSaveComponents">保存</btn>
         </div>
       </div>
       <div class="componenttree">
         <el-tree
-          :data="data"
+          :data="singleList"
           node-key="id"
-          show-checkbox
-          @check-change="handleCheckChange"
           :expand-on-click-node="false"
-          :highlight-current="currentNode!==null"
-          @node-click="handleNodeClick"
           default-expand-all>
-          <span :class="['custom-tree-node','text2']" slot-scope="{ node, data }">
-            <span  :class="[data.status===1?'status1':'']">{{ data.label }}</span>
+          <span v-if="data.levels===2" :class="['custom-tree-node','text2','flex_start']" slot-scope="{ node, data }">
+            <span>{{ data.name }}</span>
+            <span class="check_span">
+              <check-box :row="data" :options="[1,2]" :checkValue="data.pitchType" @success="handleChangePitchType"></check-box>
+            </span>
+
+          </span>
+          <span v-else :class="['custom-tree-node','text2','flex_start']" slot-scope="{ node, data }">
+            <span>{{ data.name }}</span>
           </span>
         </el-tree>
       </div>
@@ -72,6 +72,7 @@
 <script>
 import CenterDialog from '@/components/CenterDialog'
 import Btn from '@/components/Btn'
+import CheckBox from '@/components/CheckBox'
 import {
   Tree,
   Button,
@@ -83,6 +84,7 @@ export default {
   components: {
     CenterDialog,
     Btn,
+    CheckBox,
     ElTree: Tree,
     ElButton: Button,
     ElInput: Input
@@ -91,47 +93,53 @@ export default {
     return {
       dialogVisible: false,
       categoryName: '',
-      currentNode: {},
-      data: [{
-        id: 1,
-        label: '一级 1',
-        children: [{
-          id: 4,
-          label: '二级 1-1',
-          children: [{
-            id: 9,
-            label: '三级 1-1-1'
-          }, {
-            id: 10,
-            label: '三级 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: '一级 2',
-        children: [{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 6,
-          label: '二级 2-2'
-        }]
-      }, {
-        id: 3,
-        label: '一级 3',
-        children: [{
-          id: 7,
-          label: '二级 3-1'
-        }, {
-          id: 8,
-          label: '二级 3-2'
-        }]
-      }]
+      currentNode: null,
+      data: [],
+      parentData: {
+
+      },
+      singleList: [],
+      currentNodePitchList: [] // 当前中间栏节点的关联单品列表 数据来自singleList递归查询，不使用currentNode里已保存的单品
     }
   },
+  watch: {
+  },
   methods: {
-    handleSetNode (title) {
+    async _getList () {
+      try {
+        this.parentData = JSON.parse(this.$route.query.parentData)
+        const res = await this.$http.post(this.$apis.api_category_listByParentId, {parentUuid: this.parentData.uuid})
+        if (res.code !== 'SUCCESS') {
+          return Message.error(res.msg)
+        }
+        this.data = res.result
+        this.$store.commit('suit/set_node3List', this.data)
+      } catch (error) {
+        console.log(error)
+        Message.error('error')
+      }
+    },
+    async _getSingleList () {
+      try {
+        const res = await this.$http.post(this.$apis.api_category_queryByCategoryList, {uuid: this.currentNode.uuid})
+        if (res.code !== 'SUCCESS') {
+          return Message.error(res.msg)
+        }
+        this.singleList = res.result ? res.result : []
+        this.searchPitch(1, this.singleList)
+      } catch (error) {
+        console.log(error)
+        Message.error('获取单品数据失败')
+      }
+    },
+    handleNodeClick (data, node, component) {
+      this.currentNode = data
+      this._getSingleList()
+    },
+    handleSetNode (data) {
       console.log(this.currentNode)
+      this.currentNode = data
+      this.categoryName = data.name
       this.dialogVisible = true
     },
     close () {
@@ -161,9 +169,75 @@ export default {
         console.log(error)
       }
     },
-    handleCheckChange (data, checked, indeterminate) {
-      console.log(data, checked, indeterminate)
+    handleChangePitchType (arr) {
+      console.log(arr[0].pitchType, arr[1])
+      arr[0].pitchType = arr[1]
+      if (arr[1] === 1) {
+        let selectSingle = {
+          uuid: arr[0].uuid,
+          name: arr[0].name
+        }
+        this.currentNodePitchList.push(selectSingle)
+      } else {
+        this.currentNodePitchList.forEach((item, index) => {
+          if (item.uuid === arr[0].uuid) {
+            this.currentNodePitchList.splice(index, 1)
+          }
+        })
+      }
+    },
+    // 查询当前节点的关联单品
+    searchPitch (pitchType, data) {
+      let arr = []
+      function deep (pitchType, list) {
+        list.forEach(item => {
+          if (item.pitchType === pitchType) {
+            arr.push({
+              name: item.name,
+              uuid: item.uuid
+            })
+          } else {
+            if (item.children) {
+              deep(1, item.children)
+            }
+          }
+        })
+      }
+      deep(pitchType, data)
+      this.currentNodePitchList = arr
+    },
+    async handleSaveComponents () {
+      if (!this.currentNode) {
+        return Message.warning('请选择中间栏分类')
+      }
+      try {
+        let categoryUuids = []
+        if (this.currentNodePitchList.length < 1) {
+          categoryUuids = ''
+        } else {
+          let arr = this.currentNodePitchList.map(item => {
+            return item.uuid
+          })
+          categoryUuids = arr.join(',')
+        }
+
+        let params = {
+          id: this.currentNode.id,
+          categoryUuids
+        }
+        const res = await this.$http.post(this.$apis.api_category_update, params)
+        if (res.code !== 'SUCCESS') {
+          return Message.error(res.msg)
+        }
+        Message.success('保存成功')
+      } catch (error) {
+        console.log(error)
+        Message.error('error')
+      }
     }
+  },
+  created () {
+    this._getList()
   }
 }
 </script>
@@ -201,7 +275,7 @@ export default {
   justify-content: space-between;
 }
 .text2 {
-  font-size: 20px;
+  font-size: 16px;
   font-family: Noto Sans S Chinese;
   font-weight: 500;
   color: #333333;
@@ -260,5 +334,13 @@ export default {
 }
 .componenttree {
   margin-left: 74px;
+}
+.flex_start {
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+}
+.check_span {
+  margin-left: 24px;
 }
 </style>

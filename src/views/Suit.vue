@@ -158,7 +158,7 @@ export default {
         this.$router.replace({
           path: '/base/suitSecondNode',
           query: {
-            currentNode: JSON.stringify(this.currentNode)
+            parentData: JSON.stringify({uuid: this.currentNode.uuid, name: this.currentNode.name})
           }
         })
       }
@@ -189,7 +189,7 @@ export default {
       try {
         console.log('save', this.currentNode)
         let params = {
-          packageType: 1,
+          packageType: 2,
           name: this.categoryName,
           parentUuid: this.currentNode === null ? 0 : this.currentNode.uuid
         }
@@ -217,6 +217,12 @@ export default {
           return Message.error(res.msg)
         }
         this.currentNode.name = res.result.name
+        this.$router.replace({
+          path: '/base/suitSecondNode',
+          query: {
+            parentData: {uuid: this.currentNode.uuid, name: this.currentNode.name}
+          }
+        })
         Message.success('修改成功')
         this.dialogVisible = false
       } catch (error) {
@@ -266,10 +272,14 @@ export default {
       if (this.currentNode === null) {
         this.data.push(data)
       } else {
-        if (!this.currentNode.children) {
-          this.$set(this.currentNode, 'children', [])
+        if (this.currentNode.levels === 0) {
+          if (!this.currentNode.children) {
+            this.$set(this.currentNode, 'children', [])
+          }
+          this.currentNode.children.push(data)
+        } else if (this.currentNode.levels === 1) {
+          this.$store.commit('suit/push_node3List', data)
         }
-        this.currentNode.children.push(data)
       }
     },
     async handleStatus (status) {
@@ -321,9 +331,11 @@ $color1:rgba(77, 77, 77, 1);
   box-sizing: border-box;
   margin-right: 30px;
   width: 300px;
+  overflow-y: scroll;
 }
 .right_card {
   flex: 1;
+  overflow-y: scroll;
 }
 .add {
   text-align: right;
@@ -343,37 +355,37 @@ $color1:rgba(77, 77, 77, 1);
   justify-content: space-between;
 }
 .text1 {
-  font-size: 22px;
+  font-size: 18px;
   font-family: Noto Sans S Chinese;
   font-weight: 500;
   color: #4972F1;
 }
 .text2 {
-  font-size: 20px;
+  font-size: 16px;
   font-family: Noto Sans S Chinese;
   font-weight: 500;
   color: #333333;
 }
 .text3 {
-  font-size: 20px;
-  font-family: Noto Sans S Chinese;
-  font-weight: 500;
-  color: #4D4D4D;
-}
-.text4 {
-  font-size: 18px;
-  font-family: Noto Sans S Chinese;
-  font-weight: 500;
-  color: #4D4D4D;
-}
-.text5 {
   font-size: 16px;
   font-family: Noto Sans S Chinese;
   font-weight: 500;
   color: #4D4D4D;
 }
-.text6 {
+.text4 {
   font-size: 15px;
+  font-family: Noto Sans S Chinese;
+  font-weight: 500;
+  color: #4D4D4D;
+}
+.text5 {
+  font-size: 14px;
+  font-family: Noto Sans S Chinese;
+  font-weight: 500;
+  color: #4D4D4D;
+}
+.text6 {
+  font-size: 13px;
   font-family: Noto Sans S Chinese;
   font-weight: 500;
   color: #4D4D4D;

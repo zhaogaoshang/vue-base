@@ -66,6 +66,16 @@ const route = new Router({
           ]
 
         },
+        // 部位标签
+        {
+          path: '/base/position/label',
+          name: 'BasePositionLabel',
+          component: () => import('@/views/BasePositionLabel.vue'),
+          meta: {
+            requiresAuth: true
+          }
+
+        },
         {
           path: 'base/position/special',
           component: () => import('@/views/PositionSpecial'),
