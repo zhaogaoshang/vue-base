@@ -64,8 +64,28 @@ const route = new Router({
               }
             }
           ]
-
         },
+        {
+          path: '/base/photo',
+          name: 'BasePhoto',
+          component: () => import('@/views/BasePhoto.vue'),
+          meta: {
+            requiresAuth: true
+          },
+          children: [
+          ]
+        },
+        {
+          path: '/base/photo/sub',
+          name: 'BasePhotoSub',
+          component: () => import('@/views/BasePhotoSub.vue'),
+          meta: {
+            requiresAuth: true
+          },
+          children: [
+          ]
+        },
+
         // 部位标签
         {
           path: '/base/position/label',

@@ -49,8 +49,7 @@ $yj-50: 50px;
 }
 
 .public-heng {
-  display: flex;
-  flex-direction: row;
+  @extend .public-row;
   align-items: center;
   .public-center{
     flex: 1;
@@ -58,8 +57,7 @@ $yj-50: 50px;
 }
 
 .public-info__diriction{
-  display: flex;
-  flex-direction: row;
+  @extend .public-row;
   align-items: stretch;
 }
 
@@ -69,15 +67,13 @@ $yj-50: 50px;
 }
 
 .public-row__center {
-  display: flex;
-  flex-direction: row;
+  @extend .public-row;
   justify-content: center;
   align-items: center;
 }
 
 .public-column__center {
-  display: flex;
-  justify-content: center;
+  @extend .public-column;
   align-items: center;
   flex-direction: column;
 }
