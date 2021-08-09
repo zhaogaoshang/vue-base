@@ -34,12 +34,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .index-info__box{
-  background-color: $theme-lan;
   .right-box{
     flex: 1;
     height: 100vh;
     overflow-y: scroll;
-    border-radius: 30px 0 0 30px;
     background-color: white;
     .user-box__aubot{
       padding: 30px;
