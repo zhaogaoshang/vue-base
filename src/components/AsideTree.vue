@@ -97,26 +97,6 @@ export default {
             {
               name: '部位标签管理',
               path: '/base/position/label'
-            },
-            {
-              name: '量体部位管理',
-              path: '/base/measure'
-            },
-            {
-              name: '特体部位管理',
-              path: '/base/position/special'
-            },
-            {
-              name: '面料品牌管理',
-              path: '/base/cloth/brand'
-            },
-            {
-              name: '报损原因管理',
-              path: '/base/loss'
-            },
-            {
-              name: '放量原因管理',
-              path: '/base/largesse'
             }
           ]
         },
