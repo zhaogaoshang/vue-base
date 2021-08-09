@@ -8,15 +8,15 @@ const route = new Router({
     {
       path: '/',
       name: 'Index',
-      component: () => import('@/views/Index'),
-      redirect: '/personality/store',
+      component: () => import('@/views/Container'),
+      redirect: '/index',
       meta: {
         requiresAuth: true
       },
       children: [
         {
-          path: '/personality/store',
-          component: () => import('@/views/PersonalityStore'),
+          path: '/index',
+          component: () => import('@/views/Index'),
           meta: {
             requiresAuth: true
           }
