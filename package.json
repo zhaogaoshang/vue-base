@@ -20,7 +20,7 @@
     "element-ui": "^2.15.1",
     "less-loader": "^5.0.0",
     "lib-flexible": "^0.3.2",
-    "qs": "^6.9.6",
+    "qs": "^6.11.2",
     "sass-resources-loader": "^2.1.1",
     "vue": "^2.5.2",
     "vue-axios": "^3.2.4",
