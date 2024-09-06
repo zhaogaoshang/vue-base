@@ -16,12 +16,12 @@
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.6.8",
     "element-ui": "^2.15.1",
-    "less-loader": "^5.0.0",
+    "less-loader": "^8.0.0",
     "lib-flexible": "^0.3.2",
     "qs": "^6.9.6",
-    "sass-resources-loader": "^2.1.1",
+    "sass-resources-loader": "^2.2.5",
     "vue": "^2.5.2",
     "vue-axios": "^3.2.4",
     "vue-router": "^3.0.1",
